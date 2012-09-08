@@ -9,5 +9,6 @@
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_logout">LogoutActivity</string>
+    <string name="title_activity_create_event">CreateEvent</string>
 
 </resources>
