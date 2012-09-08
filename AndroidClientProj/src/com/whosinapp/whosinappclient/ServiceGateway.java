@@ -1,17 +1,24 @@
 package com.whosinapp.whosinappclient;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import org.json.*;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
 
 public class ServiceGateway {
+	
+	private final static String TAG = ServiceGateway.class.getSimpleName();
 	
 	public void Send(LoginRequestDto dto) throws ClientProtocolException, IOException {
 		HashMap<String, String> m = new HashMap<String, String>();
@@ -53,6 +60,31 @@ public class ServiceGateway {
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
 		HttpClient webSender = new DefaultHttpClient();
-		webSender.execute(poster);
+		
+		
+		HttpResponse response = webSender.execute(poster);
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+		StringBuilder builder = new StringBuilder();
+		for (String line = null; (line = reader.readLine()) != null;) {
+		    builder.append(line).append("\n");
+		}
+		JSONTokener tokener = new JSONTokener(builder.toString());
+		JSONArray finalResult;
+		try {
+			finalResult = new JSONArray(tokener);
+			Log.d(TAG, "HttpResponse: " + finalResult.toString());
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+			e.printStackTrace();
+		}
+
+		
+		
+		
+		
+
+		
+		
 	}
 }
