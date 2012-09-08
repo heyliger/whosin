@@ -42,7 +42,14 @@
         <activity
             android:name=".adduserstoevent.AddUsersToEventActivity"
             android:label="@string/title_activity_add_users_to_event" >
-            
+        </activity>
+        <activity
+            android:name=".adduserstogroup.AddUsersToGroupActivity"
+            android:label="@string/title_activity_add_users_to_group" >
+        </activity>
+        <activity
+            android:name=".creategroup.CreateGroupActivity"
+            android:label="@string/title_activity_create_group" >
         </activity>
     </application>
 
