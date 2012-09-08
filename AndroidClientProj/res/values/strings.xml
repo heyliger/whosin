@@ -15,4 +15,7 @@
     <string name="search">Search</string>
 	<string name="add_member">Add a friend</string>
     
+    <string name="title_activity_add_users_to_group">AddUsersToGroupActivity</string>
+    <string name="title_activity_create_group">CreateGroupActivity</string>
+
 </resources>

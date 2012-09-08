@@ -20,6 +20,9 @@ implements OnClickListener
         Button logoutButton = (Button)this.findViewById(R.id.button_Home_Logout);
         logoutButton.setClickable(true);
         logoutButton.setOnClickListener(this);
+        Button createEventButton = (Button)this.findViewById(R.id.button_home_CreateNewEvent);
+        
+        createEventButton.setOnClickListener(this);
     }
 
     @Override
@@ -34,6 +37,10 @@ implements OnClickListener
 			//Do Logout
 			myController.DoLogout();
 		}
-		
+		if (arg0.getId()==R.id.button_home_CreateNewEvent)
+		{
+			//Add event
+			myController.DoCreateEvent();
+		}
 	}
 }
