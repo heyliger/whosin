@@ -1,5 +1,9 @@
 package com.whosinapp.whosinappclient;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -33,6 +37,14 @@ implements OnClickListener
 		EditText userName = (EditText) this.findViewById(R.id.editText1);
 		EditText passWord = (EditText) this.findViewById(R.id.editText2);
 		
-		myController.DoLogin(userName.getText(),passWord.getText());
+		try {
+			myController.DoLogin(userName.getText(),passWord.getText());
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,5 +1,9 @@
 package com.whosinapp.whosinappclient;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+
 import android.text.Editable;
 
 public class MainActivityController {
@@ -8,7 +12,7 @@ public class MainActivityController {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void DoLogin(Editable text, Editable text2) {
+	public void DoLogin(Editable text, Editable text2) throws ClientProtocolException, IOException {
 		// TODO Auto-generated method stub
 		String user = text.toString();
 		String pass = text2.toString();
