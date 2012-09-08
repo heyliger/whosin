@@ -34,6 +34,10 @@ implements OnClickListener
 			//Do Logout
 			myController.DoLogout();
 		}
-		
+		if (arg0.getId()==R.id.button_home_CreateNewEvent)
+		{
+			//Add event
+			myController.DoCreateEvent();
+		}
 	}
 }

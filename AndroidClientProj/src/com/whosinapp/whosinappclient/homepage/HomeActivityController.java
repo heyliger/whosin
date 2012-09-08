@@ -1,5 +1,6 @@
 package com.whosinapp.whosinappclient.homepage;
 
+import com.whosinapp.whosinappclient.createevent.CreateEvent;
 import com.whosinapp.whosinappclient.logout.LogoutActivity;
 
 import android.content.Intent;
@@ -13,6 +14,10 @@ public class HomeActivityController {
 	public void DoLogout() {
 		Intent goDoLogoutActivity = new Intent(myActivity, LogoutActivity.class);
 		myActivity.startActivity(goDoLogoutActivity);
+	}
+	public void DoCreateEvent() {
+		Intent goDoCreateEventActivity = new Intent(myActivity, CreateEvent.class);
+		myActivity.startActivity(goDoCreateEventActivity);
 	}
 
 }
