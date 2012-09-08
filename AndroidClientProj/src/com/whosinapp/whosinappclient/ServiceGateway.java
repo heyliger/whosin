@@ -7,6 +7,7 @@ import java.util.*;
 import org.json.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.*;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -20,10 +21,16 @@ public class ServiceGateway {
 	
 	private final static String TAG = ServiceGateway.class.getSimpleName();
 	private static String serverURI = "http://192.168.0.9:3000";
-	public void Send(LoginRequestDto dto) throws ClientProtocolException, IOException {
+	public void Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
+		HttpDelete theDelete = new HttpDelete(serverURI+"/api/v1/tokens/"+logoutReq.getToken()+".json");
+		theDelete.setHeader("Content-Type", "application/x-www-form-urlencoded");
+		HttpClient webClient = new DefaultHttpClient();
+		webClient.execute(theDelete);
+	}
+	public String Send(LoginRequestDto loginReq) throws ClientProtocolException, IOException, JSONException {
 		HashMap<String, String> m = new HashMap<String, String>();
-		m.put("email", dto.getUserName());
-		m.put("password", dto.getPassword());
+		m.put("email", loginReq.getUserName());
+		m.put("password", loginReq.getPassword());
 		
 		JSONObject j = new JSONObject(m);
 		
@@ -32,11 +39,15 @@ public class ServiceGateway {
         httpPost.setEntity(new StringEntity(j.toString()));
 
         //httpPost.setHeader("Accept", "application/json");
-
-        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        httpPost.setHeader("Accept","application/json");
+        httpPost.setHeader("Content-type", "application/json");
+		
         
         HttpClient webClient = new DefaultHttpClient();
-        webClient.execute(httpPost);
+        HttpResponse theResponse = webClient.execute(httpPost);
+        
+        JSONObject replyReader = new JSONObject(theResponse.toString());
+        return replyReader.get("token").toString();
 	}
 
 	public void Send(NewUserRequestDto dto) throws ClientProtocolException, IOException {
