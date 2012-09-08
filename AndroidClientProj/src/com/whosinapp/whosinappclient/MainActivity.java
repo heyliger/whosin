@@ -5,11 +5,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity
-implements OnClickListener
+implements android.view.View.OnClickListener
 {
 	MainActivityController myController = new MainActivityController(this);
 	Button doLogin ;
@@ -28,11 +29,12 @@ implements OnClickListener
         return true;
     }
 
-	public void onClick(DialogInterface arg0, int arg1) {
-		// TODO Auto-generated method stub
+
+	public void onClick(View v) {
 		EditText userName = (EditText) this.findViewById(R.id.editText1);
 		EditText passWord = (EditText) this.findViewById(R.id.editText2);
 		
 		myController.DoLogin(userName.getText(),passWord.getText());
+		
 	}
 }
