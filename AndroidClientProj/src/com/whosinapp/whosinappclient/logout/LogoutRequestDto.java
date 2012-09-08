@@ -1,4 +1,4 @@
-package com.whosinapp.whosinappclient;
+package com.whosinapp.whosinappclient.logout;
 
 public class LogoutRequestDto {
 	private String token;

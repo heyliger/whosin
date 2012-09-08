@@ -1,6 +1,6 @@
 package com.whosinapp.whosinappclient.homepage;
 
-import com.whosinapp.whosinappclient.LogoutActivity;
+import com.whosinapp.whosinappclient.logout.LogoutActivity;
 
 import android.content.Intent;
 

@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
+import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 
 public class ServiceGateway {
 	
@@ -45,8 +46,9 @@ public class ServiceGateway {
         
         HttpClient webClient = new DefaultHttpClient();
         HttpResponse theResponse = webClient.execute(httpPost);
-        
-        JSONObject replyReader = new JSONObject(theResponse.toString());
+        BufferedReader reader = new BufferedReader(new InputStreamReader(theResponse.getEntity().getContent(), "UTF-8"));
+		
+		JSONObject replyReader = new JSONObject(reader.readLine());
         return replyReader.get("token").toString();
 	}
 

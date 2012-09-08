@@ -15,10 +15,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends Activity
+public class LoginActivity extends Activity
 implements android.view.View.OnClickListener
 {
-	MainActivityController myController = new MainActivityController(this);
+	LoginActivityController myController = new LoginActivityController(this);
 	Button doLogin ;
     @Override
     public void onCreate(Bundle savedInstanceState) {

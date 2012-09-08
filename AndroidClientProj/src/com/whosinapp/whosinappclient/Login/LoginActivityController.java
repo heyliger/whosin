@@ -12,12 +12,12 @@ import android.content.Intent;
 import android.text.Editable;
 import android.widget.Toast;
 
-public class MainActivityController {
+public class LoginActivityController {
 	public static String GoodLoginToken = "";
-	public MainActivityController(MainActivity mainActivity) {
+	public LoginActivityController(LoginActivity mainActivity) {
 		myActivity = mainActivity;
 	}
-	MainActivity myActivity;
+	LoginActivity myActivity;
 	public void DoLogin(Editable text, Editable text2) throws ClientProtocolException, IOException {
 		// TODO Auto-generated method stub
 		String user = text.toString();
@@ -36,10 +36,6 @@ public class MainActivityController {
 		if (myTokenOfAwesome.length() > 0)
 		{
 			//Sweet Login
-			Toast msg = new Toast(myActivity);
-			
-			msg.setText(myTokenOfAwesome);
-			msg.show();
 			GoodLoginToken = myTokenOfAwesome;
 			Intent goToMainPage = new Intent(myActivity,HomeActivity.class);
 			myActivity.startActivity(goToMainPage);
@@ -47,9 +43,6 @@ public class MainActivityController {
 		}
 		else
 		{
-			Toast fail = new Toast(myActivity);
-			fail.setText("LoginFail");
-			fail.show();
 			//Fail Login
 		}
 		

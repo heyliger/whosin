@@ -1,11 +1,15 @@
-package com.whosinapp.whosinappclient;
+package com.whosinapp.whosinappclient.logout;
 
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
 
-import com.whosinapp.whosinappclient.Login.MainActivity;
-import com.whosinapp.whosinappclient.Login.MainActivityController;
+import com.whosinapp.whosinappclient.R;
+import com.whosinapp.whosinappclient.ServiceGateway;
+import com.whosinapp.whosinappclient.Login.LoginActivity;
+import com.whosinapp.whosinappclient.Login.LoginActivityController;
+import com.whosinapp.whosinappclient.R.layout;
+import com.whosinapp.whosinappclient.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +24,7 @@ public class LogoutActivity extends Activity {
         setContentView(R.layout.activity_logout);
         ServiceGateway gate = new ServiceGateway();
         LogoutRequestDto logoutMsg = new LogoutRequestDto();
+        logoutMsg.setToken(LoginActivityController.GoodLoginToken);
         try {
 			gate.Send(logoutMsg);
 		} catch (ClientProtocolException e) {
@@ -29,8 +34,8 @@ public class LogoutActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        Intent backToLogin = new Intent(this,MainActivity.class);
-        MainActivityController.GoodLoginToken = "";
+        Intent backToLogin = new Intent(this,LoginActivity.class);
+        LoginActivityController.GoodLoginToken = "";
         this.startActivity(backToLogin);
     }
 
