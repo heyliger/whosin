@@ -3,6 +3,7 @@ package com.whosinapp.whosinappclient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import org.json.*;
 import org.apache.http.HttpResponse;
@@ -14,8 +15,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
+import com.whosinapp.whosinappclient.Login.LoginActivityController;
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
+import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 
@@ -101,6 +104,60 @@ public class ServiceGateway {
 		
 		
 	}
+	
+	/**
+	 * 
+	 * @param dto
+	 * @return The ID of the user if we found their email address
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+	public int Send(SearchForUserByEmailDto dto) throws ClientProtocolException, IOException {
+		
+		HashMap<String,String> map = new HashMap<String,String>();
+		
+		map.put("email",dto.getEmail());		
+		map.put("auth_token", LoginActivityController.GoodLoginToken);
+		
+		JSONObject jsonBuilder = new JSONObject(map);
+		
+		HttpPost poster = new HttpPost(serverURI+"/users/by_email.json");
+			poster.setEntity(new StringEntity(jsonBuilder.toString()));
+
+		poster.setHeader("Accept","application/json");
+		poster.setHeader("Content-type", "application/json");
+		HttpClient webSender = new DefaultHttpClient();
+		
+		
+		HttpResponse response;
+		response = webSender.execute(poster);
+
+		
+		BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+		StringBuilder builder = new StringBuilder();
+		for (String line = null; (line = reader.readLine()) != null;) {
+		    builder.append(line).append("\n");
+		}
+		JSONTokener tokener = new JSONTokener(builder.toString());
+		JSONArray finalResult;
+		try {
+			finalResult = new JSONArray(tokener);
+			Log.d(TAG, "HttpResponse: " + finalResult.toString());
+			// if we found the user, return their id
+			if (finalResult.toString().equals("yay")){
+				return 1;
+			}
+			
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return -1;
+
+		
+	}
+	
 	public void Send(CreateEventDto dto) {
 		// TODO Auto-generated method stub
 		

@@ -11,5 +11,8 @@
     <string name="title_activity_logout">LogoutActivity</string>
     <string name="title_activity_create_event">CreateEvent</string>
     <string name="title_activity_add_users_to_event">AddUsersToEventActivity</string>
-
+    <string name="search_for_email">Search for a friend by email address</string>
+    <string name="search">Search</string>
+	<string name="add_member">Add a friend</string>
+    
 </resources>
