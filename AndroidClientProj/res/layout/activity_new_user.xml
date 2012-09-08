@@ -60,7 +60,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editText_Email"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="abc123" />
 
     <TextView
         android:id="@+id/textView_passWord"
@@ -93,7 +94,8 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/editText_password"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:text="abc123" />
 
     <TextView
         android:id="@+id/textView_passConfirm"
