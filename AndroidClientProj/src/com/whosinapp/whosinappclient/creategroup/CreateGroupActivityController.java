@@ -14,6 +14,7 @@ public class CreateGroupActivityController {
 	public void CreateGroupAndTransitionToAddUsers(String groupName) {
 		ServiceGateway theGate = new ServiceGateway();
 		CreateGroupDto dto = new CreateGroupDto();
+		dto.setGroupName(groupName);
 		theGate.Send(dto);
 		Intent transitionToAddUsersToGroups = new Intent(myActivity, AddUsersToGroupActivity.class);
 		transitionToAddUsersToGroups.putExtra("groupName", groupName);
