@@ -13,9 +13,9 @@
     <string name="title_activity_add_users_to_event">AddUsersToEventActivity</string>
     <string name="search_for_email">Search for a friend by email address</string>
     <string name="search">Search</string>
-	<string name="add_member">Add a friend</string>
-    
+    <string name="add_member">Add a friend</string>
     <string name="title_activity_add_users_to_group">AddUsersToGroupActivity</string>
     <string name="title_activity_create_group">CreateGroupActivity</string>
+    <string name="title_activity_show_all_events_for_user">ShowAllEventsForUserActivity</string>
 
 </resources>
