@@ -44,8 +44,15 @@ public class ServiceGateway {
 		JSONObject jsonBuilder = new JSONObject(map);
 		outerMap.put("user", jsonBuilder.toString());
 		
+		//Map<String,Map<String,String> > tmp = new HashMap<String,Map<String, String> >();
+		Map<String,JSONObject> tmp = new HashMap<String,JSONObject>();
+		
+		tmp.put("user", jsonBuilder);
+		
+		JSONObject jsonBuilder2 = new JSONObject(tmp);
+		
 		HttpPost poster = new HttpPost("http://192.168.0.9:3000/users.json");
-		poster.setEntity(new StringEntity(outerMap.toString()));
+		poster.setEntity(new StringEntity(jsonBuilder2.toString()));
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
 		HttpClient webSender = new DefaultHttpClient();
