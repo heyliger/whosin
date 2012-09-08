@@ -1,8 +1,6 @@
 package com.whosinapp.whosinappclient.NewUser;
 
 import com.whosinapp.whosinappclient.R;
-import com.whosinapp.whosinappclient.R.layout;
-import com.whosinapp.whosinappclient.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;
