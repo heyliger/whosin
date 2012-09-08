@@ -52,7 +52,7 @@
         android:layout_marginTop="18dp"
         android:text="@string/user_password_caption"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
+
     <Button
         android:id="@+id/button1"
         android:layout_width="wrap_content"
@@ -61,6 +61,7 @@
         android:layout_alignRight="@+id/editText2"
         android:layout_below="@+id/editText2"
         android:layout_marginTop="40dp"
+        android:hint="Send Your Login To Server"
         android:text="Login" />
 
 </RelativeLayout>
