@@ -15,6 +15,8 @@ public class MainActivityController {
 		LoginRequestDto myDto = new LoginRequestDto();
 		myDto.setPassword(pass);
 		myDto.setUserName(user);
+		ServiceGateway theGate = new ServiceGateway();
+		theGate.Send(myDto);
 	}
 
 }
