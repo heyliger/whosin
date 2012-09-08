@@ -3,6 +3,7 @@ package com.whosinapp.whosinappclient;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.*;
 import org.json.*;
 import org.apache.http.HttpResponse;
@@ -14,6 +15,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
+import com.whosinapp.whosinappclient.Login.LoginActivityController;
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
@@ -92,17 +94,52 @@ public class ServiceGateway {
 			Log.e(TAG, e.getMessage());
 			e.printStackTrace();
 		}
-
-		
-		
-		
-		
-
-		
-		
 	}
-	public void Send(CreateEventDto dto) {
+	public int Send(CreateEventDto dto) {
 		// TODO Auto-generated method stub
+		Map<String,String> theJsonMap = new HashMap<String,String>();
+		theJsonMap.put("name",dto.getName());
+		theJsonMap.put("date_and_time(1i)", Integer.toString(dto.getYear()));
+		theJsonMap.put("date_and_time(2i)",Integer.toString(dto.getMonth()));
+		theJsonMap.put("date_and_time(3i)",Integer.toString(dto.getDay()));
+		theJsonMap.put("date_and_time(4i)",Integer.toString(dto.getHour()));
+		theJsonMap.put("date_and_time(5i)",Integer.toString(dto.getMinute()));
+		theJsonMap.put("auth_token", LoginActivityController.GoodLoginToken);
+		JSONObject innerJsonObj = new JSONObject(theJsonMap);
+		
+		Map<String,JSONObject> theOuterJson = new HashMap<String,JSONObject>();
+		theOuterJson.put("event", innerJsonObj);
+		JSONObject eventObj = new JSONObject(theOuterJson);
+		HttpPost eventPoster = new HttpPost(serverURI+"/events.json");
+		try {
+			eventPoster.setEntity(new StringEntity(eventObj.toString()));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		eventPoster.setHeader("Accept","application/json");
+		eventPoster.setHeader("Content-type", "application/json");
+		HttpClient webSender = new DefaultHttpClient();
+		
+		
+		try {
+			HttpResponse response = webSender.execute(eventPoster);
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+			JSONObject reply = new JSONObject(reader.readLine());
+			return reply.getInt("id");
+			
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 		
 	}
 }

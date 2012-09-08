@@ -21,9 +21,10 @@ public class CreateEventController {
 		dto.setMonth(month);
 		dto.setName(nameOfEvent);
 		dto.setYear(year);
-		gate.Send(dto);
+		int eventId = gate.Send(dto);
 		//Event should be created.  Flow to AddUsersToEvent.
 		Intent transitionToAddUsersToEvent = new Intent(this.myActivity,AddUsersToEventActivity.class);
+		transitionToAddUsersToEvent.putExtra("eventId", eventId);
 		this.myActivity.startActivity(transitionToAddUsersToEvent);
 	}
 
