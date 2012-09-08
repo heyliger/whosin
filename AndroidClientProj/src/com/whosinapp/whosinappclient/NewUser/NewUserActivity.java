@@ -43,7 +43,7 @@ implements OnClickListener
 		String EmailAddress= getTextFromEditViewById(R.id.editText_Email);
 		String Password= getTextFromEditViewById(R.id.editText_password);
 		String PasswordRepeat= getTextFromEditViewById(R.id.editText_passConfirm);
-		
+		this.controller.SubmitNewUser(FirstName,LastName,EmailAddress,Password,PasswordRepeat);
 		
 	}
 }
