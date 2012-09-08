@@ -16,6 +16,7 @@ import android.util.Log;
 
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
+import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 
 public class ServiceGateway {
@@ -98,6 +99,10 @@ public class ServiceGateway {
 		
 
 		
+		
+	}
+	public void Send(CreateEventDto dto) {
+		// TODO Auto-generated method stub
 		
 	}
 }
