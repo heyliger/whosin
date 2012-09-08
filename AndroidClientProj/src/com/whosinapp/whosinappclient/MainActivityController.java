@@ -12,7 +12,9 @@ public class MainActivityController {
 		// TODO Auto-generated method stub
 		String user = text.toString();
 		String pass = text2.toString();
-		
+		LoginRequestDto myDto = new LoginRequestDto();
+		myDto.setPassword(pass);
+		myDto.setUserName(user);
 	}
 
 }
