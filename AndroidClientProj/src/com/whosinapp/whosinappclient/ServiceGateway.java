@@ -12,12 +12,12 @@ public class ServiceGateway {
 	
 	public void Send(LoginRequestDto dto) throws ClientProtocolException, IOException {
 		HashMap<String, String> m = new HashMap<String, String>();
-		m.put("username", dto.getUserName());
+		m.put("email", dto.getUserName());
 		m.put("password", dto.getPassword());
 		
 		JSONObject j = new JSONObject(m);
 		
-		HttpPost httpPost = new HttpPost("http://192.168.0.9:3000/");
+		HttpPost httpPost = new HttpPost("http://192.168.0.9:3000/api/v1/tokens.json");
 
         httpPost.setEntity(new StringEntity(j.toString()));
 
