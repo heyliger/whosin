@@ -34,17 +34,14 @@ public class ServiceGateway {
 
 	public void Send(NewUserRequestDto dto) throws ClientProtocolException, IOException {
 		HashMap<String,String> map = new HashMap<String,String>();
-		Map<String,String> outerMap = new HashMap<String,String>();
+		
 		map.put("first_name", dto.getFirstName());
 		map.put("last_name", dto.getLastName());
 		map.put("password",dto.getPassword());
 		map.put("password_confirmation", dto.getPasswordConfirmation());
 		map.put("email",dto.getEmailAddress());
 		
-		JSONObject jsonBuilder = new JSONObject(map);
-		outerMap.put("user", jsonBuilder.toString());
-		
-		//Map<String,Map<String,String> > tmp = new HashMap<String,Map<String, String> >();
+		JSONObject jsonBuilder = new JSONObject(map);						
 		Map<String,JSONObject> tmp = new HashMap<String,JSONObject>();
 		
 		tmp.put("user", jsonBuilder);
