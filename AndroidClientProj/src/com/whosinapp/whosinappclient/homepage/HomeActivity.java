@@ -1,4 +1,4 @@
-package com.whosinapp.whosinappclient;
+package com.whosinapp.whosinappclient.homepage;
 
 import android.os.Bundle;
 import android.app.Activity;

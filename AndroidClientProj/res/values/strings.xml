@@ -8,5 +8,6 @@
     <string name="user_password_caption">Password:</string>
     <string name="title_activity_new_user">NewUserActivity</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_logout">LogoutActivity</string>
 
 </resources>
