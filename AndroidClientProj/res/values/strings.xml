@@ -7,5 +7,6 @@
     <string name="user_name_caption">Username:</string>
     <string name="user_password_caption">Password:</string>
     <string name="title_activity_new_user">NewUserActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
 
 </resources>

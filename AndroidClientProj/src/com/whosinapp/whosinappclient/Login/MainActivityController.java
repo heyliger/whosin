@@ -21,6 +21,12 @@ public class MainActivityController {
 		myDto.setUserName(user);
 		ServiceGateway theGate = new ServiceGateway();
 		theGate.Send(myDto);
+		Boolean successfulLogin = true; // This should parse a response  I suppose
+		if (successfulLogin)
+		{
+			//Intent goToMainPage = new Intent
+		
+		}
 	}
 
 }

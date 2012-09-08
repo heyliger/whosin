@@ -19,7 +19,7 @@ import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
 public class ServiceGateway {
 	
 	private final static String TAG = ServiceGateway.class.getSimpleName();
-	
+	private static String serverURI = "http://192.168.0.9:3000";
 	public void Send(LoginRequestDto dto) throws ClientProtocolException, IOException {
 		HashMap<String, String> m = new HashMap<String, String>();
 		m.put("email", dto.getUserName());
@@ -27,7 +27,7 @@ public class ServiceGateway {
 		
 		JSONObject j = new JSONObject(m);
 		
-		HttpPost httpPost = new HttpPost("http://192.168.0.9:3000/api/v1/tokens.json");
+		HttpPost httpPost = new HttpPost(serverURI+"/api/v1/tokens.json");
 
         httpPost.setEntity(new StringEntity(j.toString()));
 
@@ -55,7 +55,7 @@ public class ServiceGateway {
 		
 		JSONObject jsonBuilder2 = new JSONObject(tmp);
 		
-		HttpPost poster = new HttpPost("http://192.168.0.9:3000/users.json");
+		HttpPost poster = new HttpPost(serverURI+"/users.json");
 		poster.setEntity(new StringEntity(jsonBuilder2.toString()));
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
