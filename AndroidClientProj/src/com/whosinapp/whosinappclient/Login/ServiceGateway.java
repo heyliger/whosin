@@ -1,6 +1,5 @@
-package com.whosinapp.whosinappclient;
+package com.whosinapp.whosinappclient.Login;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.*;
 import org.json.*;
 import org.apache.http.client.*;

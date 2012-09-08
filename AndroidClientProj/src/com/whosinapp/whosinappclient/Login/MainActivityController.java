@@ -1,4 +1,4 @@
-package com.whosinapp.whosinappclient;
+package com.whosinapp.whosinappclient.Login;
 
 import java.io.IOException;
 

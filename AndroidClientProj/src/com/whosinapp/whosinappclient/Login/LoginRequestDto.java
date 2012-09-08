@@ -1,4 +1,4 @@
-package com.whosinapp.whosinappclient;
+package com.whosinapp.whosinappclient.Login;
 
 public class LoginRequestDto {
 	private String userName;
