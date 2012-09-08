@@ -20,6 +20,7 @@ import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
 import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
+import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 
 public class ServiceGateway {
@@ -197,6 +198,34 @@ public class ServiceGateway {
 			e.printStackTrace();
 		}
 		return 0;
+		
+	}
+	public void Send(CreateGroupDto dto) {
+		Map<String,String> jsonMap = new HashMap<String,String>();
+		jsonMap.put("auth_token", LoginActivityController.GoodLoginToken);
+		jsonMap.put("name", dto.getGroupName());
+		JSONObject request = new JSONObject(jsonMap);
+		HttpPost eventPoster = new HttpPost(serverURI+"/groups.json");
+		try {
+			eventPoster.setEntity(new StringEntity(request.toString()));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		eventPoster.setHeader("Accept","application/json");
+		eventPoster.setHeader("Content-type", "application/json");
+		HttpClient webSender = new DefaultHttpClient();
+		
+		
+			try {
+				HttpResponse response = webSender.execute(eventPoster);
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 	}
 }

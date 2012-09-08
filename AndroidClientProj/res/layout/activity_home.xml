@@ -22,4 +22,12 @@
         android:layout_marginTop="17dp"
         android:text="Create Event" />
 
+    <Button
+        android:id="@+id/button_Home_CreateGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button_home_CreateNewEvent"
+        android:text="Create Group" />
+
 </RelativeLayout>

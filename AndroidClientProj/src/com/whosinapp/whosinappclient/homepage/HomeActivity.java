@@ -4,6 +4,7 @@ import com.whosinapp.whosinappclient.R;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,9 +21,27 @@ implements OnClickListener
         Button logoutButton = (Button)this.findViewById(R.id.button_Home_Logout);
         logoutButton.setClickable(true);
         logoutButton.setOnClickListener(this);
-        Button createEventButton = (Button)this.findViewById(R.id.button_home_CreateNewEvent);
         
+        try
+        {
+        Button createEventButton = (Button)this.findViewById(R.id.button_home_CreateNewEvent);
         createEventButton.setOnClickListener(this);
+        }
+        catch (Exception err)
+        {
+        	Log.e("CreateEventButton",err.toString());
+        }
+        try
+        
+        {
+        Button createGroupButton = (Button)this.findViewById(R.id.button_Home_CreateGroup);
+        createGroupButton.setOnClickListener(this);
+        }
+        catch (Exception err)
+        {
+        	Log.e("CreateGroupButton",err.toString());
+        }
+        		
     }
 
     @Override
@@ -41,6 +60,11 @@ implements OnClickListener
 		{
 			//Add event
 			myController.DoCreateEvent();
+		}
+		if (arg0.getId()==R.id.button_Home_CreateGroup)
+		{
+			myController.DoCreateGroup();
+		
 		}
 	}
 }
