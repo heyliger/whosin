@@ -3,7 +3,7 @@ package com.whosinapp.whosinappclient.Login;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
-
+import com.whosinapp.whosinappclient.*;
 import android.text.Editable;
 
 public class MainActivityController {
