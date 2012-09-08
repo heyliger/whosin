@@ -34,14 +34,14 @@ public class ServiceGateway {
 
 	public void Send(NewUserRequestDto dto) throws ClientProtocolException, IOException {
 		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("firstName", dto.getFirstName());
-		map.put("lastName", dto.getLastName());
+		map.put("first_name", dto.getFirstName());
+		map.put("last_name", dto.getLastName());
 		map.put("password",dto.getPassword());
-		map.put("passwordConfirmation", dto.getPasswordConfirmation());
-		map.put("emailAddress",dto.getEmailAddress());
+		map.put("password_confirmation", dto.getPasswordConfirmation());
+		map.put("email",dto.getEmailAddress());
 		
 		JSONObject jsonBuilder = new JSONObject(map);
-		HttpPost poster = new HttpPost("http://192.168.0.9:3000/Nick Sucks");
+		HttpPost poster = new HttpPost("http://192.168.0.9:3000/users.json");
 		poster.setEntity(new StringEntity(jsonBuilder.toString()));
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
