@@ -24,9 +24,9 @@ public class ServiceGateway {
 
         httpPost.setEntity(new StringEntity(j.toString()));
 
-        httpPost.setHeader("Accept", "application/json");
+        //httpPost.setHeader("Accept", "application/json");
 
-        httpPost.setHeader("Content-type", "application/json");
+        httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
         
         HttpClient webClient = new DefaultHttpClient();
         webClient.execute(httpPost);
