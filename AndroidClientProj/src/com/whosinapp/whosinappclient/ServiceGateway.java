@@ -22,6 +22,7 @@ import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
+import com.whosinapp.whosinappclient.models.User;
 
 public class ServiceGateway {
 	
@@ -107,8 +108,9 @@ public class ServiceGateway {
 	 * @return The ID of the user if we found their email address
 	 * @throws ClientProtocolException
 	 * @throws IOException
+	 * @throws JSONException 
 	 */
-	public int Send(SearchForUserByEmailDto dto) throws ClientProtocolException, IOException {
+	public User Send(SearchForUserByEmailDto dto) throws ClientProtocolException, IOException, JSONException {
 		
 		HashMap<String,String> map = new HashMap<String,String>();
 		
@@ -135,21 +137,34 @@ public class ServiceGateway {
 		    builder.append(line).append("\n");
 		}
 		JSONTokener tokener = new JSONTokener(builder.toString());
-		JSONArray finalResult;
-		try {
-			finalResult = new JSONArray(tokener);
-			Log.d(TAG, "HttpResponse: " + finalResult.toString());
-			// if we found the user, return their id
-			if (finalResult.toString().equals("yay")){
-				return 1;
-			}
-			
-		} catch (JSONException e) {
-			Log.e(TAG, e.getMessage());
-			e.printStackTrace();
-		}
 		
-		return -1;
+		
+		JSONObject replyReader = new JSONObject(reader.readLine());
+
+		User user = new User();
+		
+		user.setFirstName(replyReader.get("first_name").toString());
+		user.setLastName(replyReader.get("last_name").toString());
+		user.setEmail(replyReader.get("email").toString());
+		user.setId(Long.parseLong(replyReader.get("id").toString()));
+		
+		return user;
+		
+//		JSONArray finalResult;
+//		try {
+//			finalResult = new JSONArray(tokener);
+//			Log.d(TAG, "HttpResponse: " + finalResult.toString());
+//			// if we found the user, return their id
+//			if (finalResult.toString().equals("yay")){
+//				return 1;
+//			}
+//			
+//		} catch (JSONException e) {
+//			Log.e(TAG, e.getMessage());
+//			e.printStackTrace();
+//		}
+//		
+//		return -1;
 
 		
 	}
