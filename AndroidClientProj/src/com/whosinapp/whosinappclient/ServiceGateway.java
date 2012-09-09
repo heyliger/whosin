@@ -113,7 +113,6 @@ public class ServiceGateway {
 		HashMap<String,String> map = new HashMap<String,String>();
 		
 		map.put("email",dto.getEmail());		
-		map.put("auth_token", LoginActivityController.GoodLoginToken);
 		
 		JSONObject jsonBuilder = new JSONObject(map);
 		
@@ -166,7 +165,7 @@ public class ServiceGateway {
 		theJsonMap.put("date_and_time(3i)",Integer.toString(dto.getDay()));
 		theJsonMap.put("date_and_time(4i)",Integer.toString(dto.getHour()));
 		theJsonMap.put("date_and_time(5i)",Integer.toString(dto.getMinute()));
-		theJsonMap.put("auth_token", LoginActivityController.GoodLoginToken);
+		
 		JSONObject innerJsonObj = new JSONObject(theJsonMap);
 		
 		Map<String,JSONObject> theOuterJson = new HashMap<String,JSONObject>();
@@ -207,7 +206,6 @@ public class ServiceGateway {
 	}
 	public void Send(CreateGroupDto dto) {
 		Map<String,String> jsonMap = new HashMap<String,String>();
-		jsonMap.put("auth_token", LoginActivityController.GoodLoginToken);
 		jsonMap.put("name", dto.getGroupName());
 		JSONObject request = new JSONObject(jsonMap);
 		HttpPost eventPoster = new HttpPost(serverURI+"/groups.json");
