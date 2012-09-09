@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import org.json.*;
@@ -26,6 +27,7 @@ import com.whosinapp.whosinappclient.adduserstoevent.AddUsersToEventDto;
 import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
+import com.whosinapp.whosinappclient.getalleventsforuser.GetAllEventsForUserDto;
 import com.whosinapp.whosinappclient.getgroupsforuser.GetGroupsForUserDto;
 import com.whosinapp.whosinappclient.getusersforgroup.GetUsersForGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
@@ -92,8 +94,8 @@ public class ServiceGateway {
 	            return results;
 	}
 
-	public Iterable<EventInfoStub> Send(LogoutRequestDto logoutReq)
-			throws ClientProtocolException, IOException {
+	public void Send(LogoutRequestDto logoutReq)
+			throws ClientProtocolException, IOException, JSONException {
 		HttpDelete theDelete = new HttpDelete(serverURI + "/api/v1/tokens/"
 				+ logoutReq.getToken() + ".json");
 		theDelete.setHeader("X-API-KEY", logoutReq.getToken());
@@ -101,7 +103,84 @@ public class ServiceGateway {
 				.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
 		HttpClient webClient = new DefaultHttpClient();
-		webClient.execute(theDelete);
+		HttpResponse webResponse = webClient.execute(theDelete);
+	}
+	public Iterable<EventInfoStub> Send(GetAllEventsForUserDto dto)
+	{
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet();
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Accept","application/json");
+        request.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
+        try {
+			request.setURI(new URI(serverURI+"/events.json"));
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        HttpResponse webResponse = null;
+		try {
+			webResponse = client.execute(request);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(
+					webResponse.getEntity().getContent(), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuilder builder = new StringBuilder();
+		try {
+			for (String line = null; (line = reader.readLine()) != null;) {
+				builder.append(line).append("\n");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			JSONArray theArr = null;
+			try {
+				theArr = new JSONArray(builder.toString());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ArrayList<EventInfoStub> retValues = new ArrayList<EventInfoStub>();
+			for(int i=0;i<theArr.length();i++)
+			{
+				JSONObject currentEvent = null;
+				try {
+					currentEvent = (JSONObject) theArr.get(i);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				EventInfoStub stub = new EventInfoStub();
+				try {
+					stub.setName(currentEvent.getString("name"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				retValues.add(stub);
+			}
+			return retValues;
+	
+		
 	}
 
 	public String Send(LoginRequestDto loginReq)

@@ -2,6 +2,7 @@ package com.whosinapp.whosinappclient.homepage;
 
 import com.whosinapp.whosinappclient.createevent.CreateEvent;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupActivity;
+import com.whosinapp.whosinappclient.getalleventsforuser.ShowAllEventsForUserActivity;
 import com.whosinapp.whosinappclient.getgroupsforuser.GetGroupsForUserActivity;
 import com.whosinapp.whosinappclient.getusersforgroup.GetUsersForGroupActivity;
 import com.whosinapp.whosinappclient.logout.LogoutActivity;
@@ -33,6 +34,11 @@ public class HomeActivityController {
 	public void DoGetGroupsForUser(){
 		Intent goDoCreateGroupActivity = new Intent(myActivity, GetGroupsForUserActivity.class);
 			myActivity.startActivity(goDoCreateGroupActivity);
+	}
+	public void DoGetAllEventsForUser() {
+		Intent goGetAllEvents = new Intent(myActivity, ShowAllEventsForUserActivity.class);
+		myActivity.startActivity(goGetAllEvents);
+		
 	}
 
 }

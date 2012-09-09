@@ -3,6 +3,7 @@ package com.whosinapp.whosinappclient.logout;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
 
 import com.whosinapp.whosinappclient.R;
 import com.whosinapp.whosinappclient.ServiceGateway;
@@ -31,6 +32,9 @@ public class LogoutActivity extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
