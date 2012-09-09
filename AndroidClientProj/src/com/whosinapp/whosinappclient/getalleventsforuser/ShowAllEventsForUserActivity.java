@@ -3,6 +3,7 @@ package com.whosinapp.whosinappclient.getalleventsforuser;
 import com.whosinapp.whosinappclient.R;
 import com.whosinapp.whosinappclient.R.layout;
 import com.whosinapp.whosinappclient.R.menu;
+import com.whosinapp.whosinappclient.models.EventInfoStub;
 
 import android.os.Bundle;
 import android.app.Activity;
