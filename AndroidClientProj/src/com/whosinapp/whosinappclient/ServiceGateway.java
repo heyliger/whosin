@@ -13,6 +13,7 @@ import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -180,16 +181,16 @@ public class ServiceGateway {
 
 		JSONObject jsonBuilder = new JSONObject(map);
 
-		HttpPost poster = new HttpPost(serverURI + "/events/" + dto.getEventId() + "/invite.json");
-		poster.setEntity(new StringEntity(jsonBuilder.toString()));
+		HttpPut putter = new HttpPut(serverURI + "/events/" + dto.getEventId() + "/invite.json");
+		putter.setEntity(new StringEntity(jsonBuilder.toString()));
 
-		poster.setHeader("Accept", "application/json");
-		poster.setHeader("Content-type", "application/json");
-		poster.setHeader("X-API-KEY", LoginActivityController.GoodLoginToken);
+		putter.setHeader("Accept", "application/json");
+		putter.setHeader("Content-type", "application/json");
+		putter.setHeader("X-API-KEY", LoginActivityController.GoodLoginToken);
 		HttpClient webSender = new DefaultHttpClient();
 		
 		HttpResponse response;
-		response = webSender.execute(poster);
+		response = webSender.execute(putter);
 		
 	}
 
@@ -294,7 +295,10 @@ public class ServiceGateway {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent(), "UTF-8"));
 			JSONObject reply = new JSONObject(reader.readLine());
-			return reply.getInt("id");
+			
+			int groupId = reply.getInt("id");
+			
+			return groupId;
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -304,6 +308,8 @@ public class ServiceGateway {
 			e.printStackTrace();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 		return 0;
