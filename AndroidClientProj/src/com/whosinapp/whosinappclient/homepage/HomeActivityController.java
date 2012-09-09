@@ -1,6 +1,6 @@
 package com.whosinapp.whosinappclient.homepage;
 
-import com.whosinapp.whoisinappclient.getallgroupsforuser.GetUsersForGroupActivity;
+import com.whosinapp.whoisinappclient.getusersforgroup.GetUsersForGroupActivity;
 import com.whosinapp.whosinappclient.createevent.CreateEvent;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupActivity;
 import com.whosinapp.whosinappclient.logout.LogoutActivity;

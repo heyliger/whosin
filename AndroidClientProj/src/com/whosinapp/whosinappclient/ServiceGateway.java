@@ -4,17 +4,21 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.*;
+
 import org.json.*;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
+import com.whosinapp.whoisinappclient.getusersforgroup.GetUsersForGroupDto;
 import com.whosinapp.whosinappclient.Login.LoginActivityController;
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
@@ -27,6 +31,34 @@ public class ServiceGateway {
 	
 	private final static String TAG = ServiceGateway.class.getSimpleName();
 	private static String serverURI = "http://192.168.0.9:3000";
+	
+	public ArrayList<String> Retrieve(GetUsersForGroupDto groupReq)
+	{
+		ArrayList<String> results = new ArrayList<String>();
+	        try {
+	            HttpClient client = new DefaultHttpClient();
+	            HttpGet request = new HttpGet();
+	            request.setHeader("Content-type", "application/json");
+	            request.setHeader("Accept","application/json");
+	            request.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
+	            request.setURI(new URI("http://suckit.com/"));
+	            HttpResponse response = client.execute(request);
+	            
+	            BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+	    		
+	    		JSONArray replyReader = new JSONArray(reader.readLine());
+	    		for(int i = 0; i < replyReader.length(); i++)
+	    		{
+	    			results.add(((JSONObject)replyReader.get(i)).get("name").toString());
+	    		}
+	        }
+	        catch(Exception err)
+	        {
+	        	Log.e("Retrieve(GetUsersForGroupDto groupReq)", err.getMessage());
+	        }
+	            return results;
+	}
+	
 	public void Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
 		HttpDelete theDelete = new HttpDelete(serverURI+"/api/v1/tokens/"+logoutReq.getToken()+".json");
 		theDelete.setHeader("X-API-KEY",logoutReq.getToken());
