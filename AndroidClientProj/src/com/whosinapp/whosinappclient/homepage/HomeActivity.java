@@ -31,8 +31,7 @@ implements OnClickListener
         {
         	Log.e("CreateEventButton",err.toString());
         }
-        try
-        
+        try     
         {
         Button createGroupButton = (Button)this.findViewById(R.id.button_Home_CreateGroup);
         createGroupButton.setOnClickListener(this);
@@ -40,6 +39,15 @@ implements OnClickListener
         catch (Exception err)
         {
         	Log.e("CreateGroupButton",err.toString());
+        }
+        try
+        {
+        	Button getUsersForGroupButton = (Button)this.findViewById(R.id.button_Home_GetUsersForGroup);
+        	getUsersForGroupButton.setOnClickListener(this);
+        }
+        catch (Exception err)
+        {
+        	Log.e("GetUsersForGroupButton", err.toString());
         }
         		
     }
@@ -64,7 +72,10 @@ implements OnClickListener
 		if (arg0.getId()==R.id.button_Home_CreateGroup)
 		{
 			myController.DoCreateGroup();
-		
+		}
+		if(arg0.getId()==R.id.button_Home_GetUsersForGroup)
+		{
+			myController.DoGetUsersForGroup();
 		}
 	}
 }

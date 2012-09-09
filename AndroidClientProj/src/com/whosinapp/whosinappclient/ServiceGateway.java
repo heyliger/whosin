@@ -29,6 +29,7 @@ public class ServiceGateway {
 	private static String serverURI = "http://192.168.0.9:3000";
 	public void Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
 		HttpDelete theDelete = new HttpDelete(serverURI+"/api/v1/tokens/"+logoutReq.getToken()+".json");
+		theDelete.setHeader("X-API-KEY",logoutReq.getToken());
 		theDelete.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		HttpClient webClient = new DefaultHttpClient();
 		webClient.execute(theDelete);
@@ -47,6 +48,7 @@ public class ServiceGateway {
         //httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Accept","application/json");
         httpPost.setHeader("Content-type", "application/json");
+        httpPost.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		
         
         HttpClient webClient = new DefaultHttpClient();
@@ -77,6 +79,7 @@ public class ServiceGateway {
 		poster.setEntity(new StringEntity(jsonBuilder2.toString()));
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
+		poster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		HttpClient webSender = new DefaultHttpClient();
 		
 		
@@ -110,7 +113,6 @@ public class ServiceGateway {
 		HashMap<String,String> map = new HashMap<String,String>();
 		
 		map.put("email",dto.getEmail());		
-		map.put("auth_token", LoginActivityController.GoodLoginToken);
 		
 		JSONObject jsonBuilder = new JSONObject(map);
 		
@@ -119,6 +121,7 @@ public class ServiceGateway {
 
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
+		poster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		HttpClient webSender = new DefaultHttpClient();
 		
 		
@@ -162,7 +165,7 @@ public class ServiceGateway {
 		theJsonMap.put("date_and_time(3i)",Integer.toString(dto.getDay()));
 		theJsonMap.put("date_and_time(4i)",Integer.toString(dto.getHour()));
 		theJsonMap.put("date_and_time(5i)",Integer.toString(dto.getMinute()));
-		theJsonMap.put("auth_token", LoginActivityController.GoodLoginToken);
+		
 		JSONObject innerJsonObj = new JSONObject(theJsonMap);
 		
 		Map<String,JSONObject> theOuterJson = new HashMap<String,JSONObject>();
@@ -176,6 +179,7 @@ public class ServiceGateway {
 			e.printStackTrace();
 		}
 		eventPoster.setHeader("Accept","application/json");
+		eventPoster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		eventPoster.setHeader("Content-type", "application/json");
 		HttpClient webSender = new DefaultHttpClient();
 		
@@ -202,7 +206,6 @@ public class ServiceGateway {
 	}
 	public void Send(CreateGroupDto dto) {
 		Map<String,String> jsonMap = new HashMap<String,String>();
-		jsonMap.put("auth_token", LoginActivityController.GoodLoginToken);
 		jsonMap.put("name", dto.getGroupName());
 		JSONObject request = new JSONObject(jsonMap);
 		HttpPost eventPoster = new HttpPost(serverURI+"/groups.json");
@@ -213,6 +216,7 @@ public class ServiceGateway {
 			e.printStackTrace();
 		}
 		eventPoster.setHeader("Accept","application/json");
+		eventPoster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		eventPoster.setHeader("Content-type", "application/json");
 		HttpClient webSender = new DefaultHttpClient();
 		
