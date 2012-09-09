@@ -18,7 +18,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
 
-import com.whosinapp.whoisinappclient.getusersforgroup.GetUsersForGroupDto;
 import com.whosinapp.whosinappclient.Login.LoginActivity;
 import com.whosinapp.whosinappclient.Login.LoginActivityController;
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
@@ -28,6 +27,7 @@ import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
 import com.whosinapp.whosinappclient.getgroupsforuser.GetGroupsForUserDto;
+import com.whosinapp.whosinappclient.getusersforgroup.GetUsersForGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 import com.whosinapp.whosinappclient.models.User;
 import com.whosinapp.whosinappclient.utils.StringUtils;

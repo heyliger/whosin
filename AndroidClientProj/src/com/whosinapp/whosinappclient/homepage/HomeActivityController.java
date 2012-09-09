@@ -1,9 +1,9 @@
 package com.whosinapp.whosinappclient.homepage;
 
-import com.whosinapp.whoisinappclient.getusersforgroup.GetUsersForGroupActivity;
 import com.whosinapp.whosinappclient.createevent.CreateEvent;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupActivity;
 import com.whosinapp.whosinappclient.getgroupsforuser.GetGroupsForUserActivity;
+import com.whosinapp.whosinappclient.getusersforgroup.GetUsersForGroupActivity;
 import com.whosinapp.whosinappclient.logout.LogoutActivity;
 
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package com.whosinapp.whoisinappclient.getusersforgroup;
+package com.whosinapp.whosinappclient.getusersforgroup;
 
 import java.util.ArrayList;
 

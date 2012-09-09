@@ -1,4 +1,4 @@
-package com.whosinapp.whoisinappclient.getusersforgroup;
+package com.whosinapp.whosinappclient.getusersforgroup;
 
 public class GetUsersForGroupDto {
 	private String _group;
