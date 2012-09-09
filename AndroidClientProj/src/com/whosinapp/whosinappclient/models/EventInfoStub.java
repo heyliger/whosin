@@ -1,4 +1,4 @@
-package com.whosinapp.whosinappclient.getalleventsforuser;
+package com.whosinapp.whosinappclient.models;
 
 public class EventInfoStub {
 

@@ -3,6 +3,7 @@ package com.whosinapp.whosinappclient.getalleventsforuser;
 import java.util.ArrayList;
 
 import com.whosinapp.whosinappclient.R;
+import com.whosinapp.whosinappclient.models.EventInfoStub;
 
 import android.content.Context;
 import android.view.LayoutInflater;
