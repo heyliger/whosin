@@ -22,13 +22,14 @@ import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
+import com.whosinapp.whosinappclient.models.EventInfoStub;
 import com.whosinapp.whosinappclient.models.User;
 
 public class ServiceGateway {
 	
 	private final static String TAG = ServiceGateway.class.getSimpleName();
 	private static String serverURI = "http://192.168.0.9:3000";
-	public void Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
+	public Iterable<EventInfoStub> Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
 		HttpDelete theDelete = new HttpDelete(serverURI+"/api/v1/tokens/"+logoutReq.getToken()+".json");
 		theDelete.setHeader("X-API-KEY",logoutReq.getToken());
 		theDelete.setHeader("Content-Type", "application/x-www-form-urlencoded");
