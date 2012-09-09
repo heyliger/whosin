@@ -29,6 +29,7 @@ public class ServiceGateway {
 	private static String serverURI = "http://192.168.0.9:3000";
 	public void Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
 		HttpDelete theDelete = new HttpDelete(serverURI+"/api/v1/tokens/"+logoutReq.getToken()+".json");
+		theDelete.setHeader("X-API-KEY",logoutReq.getToken());
 		theDelete.setHeader("Content-Type", "application/x-www-form-urlencoded");
 		HttpClient webClient = new DefaultHttpClient();
 		webClient.execute(theDelete);
@@ -47,6 +48,7 @@ public class ServiceGateway {
         //httpPost.setHeader("Accept", "application/json");
         httpPost.setHeader("Accept","application/json");
         httpPost.setHeader("Content-type", "application/json");
+        httpPost.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		
         
         HttpClient webClient = new DefaultHttpClient();
@@ -77,6 +79,7 @@ public class ServiceGateway {
 		poster.setEntity(new StringEntity(jsonBuilder2.toString()));
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
+		poster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		HttpClient webSender = new DefaultHttpClient();
 		
 		
@@ -119,6 +122,7 @@ public class ServiceGateway {
 
 		poster.setHeader("Accept","application/json");
 		poster.setHeader("Content-type", "application/json");
+		poster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		HttpClient webSender = new DefaultHttpClient();
 		
 		
@@ -176,6 +180,7 @@ public class ServiceGateway {
 			e.printStackTrace();
 		}
 		eventPoster.setHeader("Accept","application/json");
+		eventPoster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		eventPoster.setHeader("Content-type", "application/json");
 		HttpClient webSender = new DefaultHttpClient();
 		
@@ -213,6 +218,7 @@ public class ServiceGateway {
 			e.printStackTrace();
 		}
 		eventPoster.setHeader("Accept","application/json");
+		eventPoster.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
 		eventPoster.setHeader("Content-type", "application/json");
 		HttpClient webSender = new DefaultHttpClient();
 		
