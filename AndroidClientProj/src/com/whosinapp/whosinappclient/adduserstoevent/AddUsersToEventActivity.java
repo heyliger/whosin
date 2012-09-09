@@ -36,6 +36,8 @@ public class AddUsersToEventActivity extends Activity {
         
         
         
+        int groupId = (Integer)savedInstanceState.get("groupId");
+        
         _editTextEmailAddress = (EditText)this.findViewById(R.id.editTextEmailAddress);
         _buttonSearch = (Button)this.findViewById(R.id.buttonSearch);
         _textViewUserNotification = (TextView)this.findViewById(R.id.textViewUserNotification);

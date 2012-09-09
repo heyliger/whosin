@@ -23,12 +23,14 @@ import com.whosinapp.whosinappclient.Login.LoginActivity;
 import com.whosinapp.whosinappclient.Login.LoginActivityController;
 import com.whosinapp.whosinappclient.Login.LoginRequestDto;
 import com.whosinapp.whosinappclient.NewUser.NewUserRequestDto;
+import com.whosinapp.whosinappclient.adduserstoevent.AddUsersToEventDto;
 import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
 import com.whosinapp.whosinappclient.getgroupsforuser.GetGroupsForUserDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 import com.whosinapp.whosinappclient.models.User;
+import com.whosinapp.whosinappclient.utils.StringUtils;
 
 public class ServiceGateway {
 
@@ -168,6 +170,27 @@ public class ServiceGateway {
 			Log.e(TAG, e.getMessage());
 			e.printStackTrace();
 		}
+	}
+	
+	public void Send(AddUsersToEventDto dto) throws ClientProtocolException, IOException{
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("invitees", StringUtils.join(dto.getUserIds(), ","));
+
+		JSONObject jsonBuilder = new JSONObject(map);
+
+		HttpPost poster = new HttpPost(serverURI + "/events/" + dto.getEventId() + "/invite.json");
+		poster.setEntity(new StringEntity(jsonBuilder.toString()));
+
+		poster.setHeader("Accept", "application/json");
+		poster.setHeader("Content-type", "application/json");
+		poster.setHeader("X-API-KEY", LoginActivityController.GoodLoginToken);
+		HttpClient webSender = new DefaultHttpClient();
+		
+		HttpResponse response;
+		response = webSender.execute(poster);
+		
 	}
 
 	/**
