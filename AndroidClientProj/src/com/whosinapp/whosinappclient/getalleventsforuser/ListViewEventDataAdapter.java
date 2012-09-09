@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 public class ListViewEventDataAdapter extends BaseAdapter{
 
@@ -41,7 +42,8 @@ public class ListViewEventDataAdapter extends BaseAdapter{
 	public View getView(int arg0, View arg1, ViewGroup arg2) {
 		View theView = LayoutInflater.from(theContext).inflate(R.layout.eventlistview,arg2,false);
 		EventInfoStub theEvent = myEvents.get(arg0);
-		
+		TextView item = (TextView)theView.findViewById(R.id.textView_EventList_Name);
+		item.setText(theEvent.getName());
 		return theView;
 	}
 	

@@ -33,5 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Groups For User" />
+
+	<Button
+	    android:id="@+id/button_home_AllEventsForUser"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="All My Events" />
 	
 </LinearLayout>

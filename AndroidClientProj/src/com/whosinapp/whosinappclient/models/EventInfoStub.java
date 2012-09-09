@@ -6,5 +6,13 @@ public class EventInfoStub {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+private String name;
+	public void setName(String string) {
+		name = string;
+	}
+	public String getName()
+	{
+		return name;
+	}
 
 }

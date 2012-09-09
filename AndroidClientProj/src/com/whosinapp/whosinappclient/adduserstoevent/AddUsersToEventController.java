@@ -32,7 +32,7 @@ public class AddUsersToEventController {
 		
 	}
 	
-	public void searchForUserByEmail(Editable emailAddress)
+	public User searchForUserByEmail(Editable emailAddress)
 			throws ClientProtocolException, IOException, JSONException {
 
 		String email = emailAddress.toString();
@@ -43,15 +43,9 @@ public class AddUsersToEventController {
 		ServiceGateway theGate = new ServiceGateway();
 
 		User user = theGate.Send(myDto);
-		if (user == null) {
-			// Boo, they're not in our system
-			_myActivity.setUserNotification("Send them an invite yo!");
 
-		} else {
-			// Sweet we found our friend
-			_myActivity.setUserNotification("Yay, we found them");
-
-		}
+		
+		return user;
 
 	}
 

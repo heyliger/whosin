@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import org.json.*;
@@ -13,6 +14,7 @@ import org.apache.http.client.*;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -26,9 +28,11 @@ import com.whosinapp.whosinappclient.adduserstoevent.AddUsersToEventDto;
 import com.whosinapp.whosinappclient.adduserstoevent.SearchForUserByEmailDto;
 import com.whosinapp.whosinappclient.createevent.CreateEventDto;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupDto;
+import com.whosinapp.whosinappclient.getalleventsforuser.GetAllEventsForUserDto;
 import com.whosinapp.whosinappclient.getgroupsforuser.GetGroupsForUserDto;
 import com.whosinapp.whosinappclient.getusersforgroup.GetUsersForGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
+import com.whosinapp.whosinappclient.models.EventInfoStub;
 import com.whosinapp.whosinappclient.models.User;
 import com.whosinapp.whosinappclient.utils.StringUtils;
 
@@ -92,7 +96,7 @@ public class ServiceGateway {
 	}
 
 	public void Send(LogoutRequestDto logoutReq)
-			throws ClientProtocolException, IOException {
+			throws ClientProtocolException, IOException, JSONException {
 		HttpDelete theDelete = new HttpDelete(serverURI + "/api/v1/tokens/"
 				+ logoutReq.getToken() + ".json");
 		theDelete.setHeader("X-API-KEY", logoutReq.getToken());
@@ -100,7 +104,84 @@ public class ServiceGateway {
 				.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
 		HttpClient webClient = new DefaultHttpClient();
-		webClient.execute(theDelete);
+		HttpResponse webResponse = webClient.execute(theDelete);
+	}
+	public Iterable<EventInfoStub> Send(GetAllEventsForUserDto dto)
+	{
+        HttpClient client = new DefaultHttpClient();
+        HttpGet request = new HttpGet();
+        request.setHeader("Content-type", "application/json");
+        request.setHeader("Accept","application/json");
+        request.setHeader("X-API-KEY",LoginActivityController.GoodLoginToken);
+        try {
+			request.setURI(new URI(serverURI+"/events.json"));
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        HttpResponse webResponse = null;
+		try {
+			webResponse = client.execute(request);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(
+					webResponse.getEntity().getContent(), "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuilder builder = new StringBuilder();
+		try {
+			for (String line = null; (line = reader.readLine()) != null;) {
+				builder.append(line).append("\n");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			JSONArray theArr = null;
+			try {
+				theArr = new JSONArray(builder.toString());
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ArrayList<EventInfoStub> retValues = new ArrayList<EventInfoStub>();
+			for(int i=0;i<theArr.length();i++)
+			{
+				JSONObject currentEvent = null;
+				try {
+					currentEvent = (JSONObject) theArr.get(i);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				EventInfoStub stub = new EventInfoStub();
+				try {
+					stub.setName(currentEvent.getString("name"));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				retValues.add(stub);
+			}
+			return retValues;
+	
+		
 	}
 
 	public String Send(LoginRequestDto loginReq)
@@ -180,16 +261,16 @@ public class ServiceGateway {
 
 		JSONObject jsonBuilder = new JSONObject(map);
 
-		HttpPost poster = new HttpPost(serverURI + "/events/" + dto.getEventId() + "/invite.json");
-		poster.setEntity(new StringEntity(jsonBuilder.toString()));
+		HttpPut putter = new HttpPut(serverURI + "/events/" + dto.getEventId() + "/invite.json");
+		putter.setEntity(new StringEntity(jsonBuilder.toString()));
 
-		poster.setHeader("Accept", "application/json");
-		poster.setHeader("Content-type", "application/json");
-		poster.setHeader("X-API-KEY", LoginActivityController.GoodLoginToken);
+		putter.setHeader("Accept", "application/json");
+		putter.setHeader("Content-type", "application/json");
+		putter.setHeader("X-API-KEY", LoginActivityController.GoodLoginToken);
 		HttpClient webSender = new DefaultHttpClient();
 		
 		HttpResponse response;
-		response = webSender.execute(poster);
+		response = webSender.execute(putter);
 		
 	}
 
@@ -274,11 +355,7 @@ public class ServiceGateway {
 		theJsonMap.put("date_and_time", dto.getDateAndTime());
 
 
-		JSONObject innerJsonObj = new JSONObject(theJsonMap);
-
-		Map<String, JSONObject> theOuterJson = new HashMap<String, JSONObject>();
-		theOuterJson.put("event", innerJsonObj);
-		JSONObject eventObj = new JSONObject(theOuterJson);
+		JSONObject eventObj = new JSONObject(theJsonMap);
 		HttpPost eventPoster = new HttpPost(serverURI + "/events.json");
 		try {
 			eventPoster.setEntity(new StringEntity(eventObj.toString()));
@@ -298,7 +375,10 @@ public class ServiceGateway {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(
 					response.getEntity().getContent(), "UTF-8"));
 			JSONObject reply = new JSONObject(reader.readLine());
-			return reply.getInt("id");
+			
+			int groupId = reply.getInt("id");
+			
+			return groupId;
 
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -308,6 +388,8 @@ public class ServiceGateway {
 			e.printStackTrace();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 		return 0;
