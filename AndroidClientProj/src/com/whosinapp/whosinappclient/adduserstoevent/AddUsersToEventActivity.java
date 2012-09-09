@@ -3,6 +3,7 @@ package com.whosinapp.whosinappclient.adduserstoevent;
 import java.io.IOException;
 
 import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
 
 import com.whosinapp.whosinappclient.R;
 import com.whosinapp.whosinappclient.Login.LoginActivityController;
@@ -49,6 +50,9 @@ public class AddUsersToEventActivity extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

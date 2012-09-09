@@ -45,7 +45,9 @@ public class ServiceGatewayTest extends AndroidTestCase{
 		
 		try {
 			
-			_serviceGateway.Send(dto);	
+			User user = _serviceGateway.Send(dto);	
+			
+			assertEquals("user@example.com", user.getEmail());
 			
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
@@ -55,7 +57,7 @@ public class ServiceGatewayTest extends AndroidTestCase{
 			e.printStackTrace();
 		}
 		
-		//assertEquals(9,mClassToTest.add(mArg1,mArg2));
+		
 	}
 
 	public void testFailToFindUserByEmail() throws JSONException{
@@ -68,6 +70,8 @@ public class ServiceGatewayTest extends AndroidTestCase{
 			
 			User user = _serviceGateway.Send(dto);	
 			
+			assertEquals(null, user);
+			
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +80,7 @@ public class ServiceGatewayTest extends AndroidTestCase{
 			e.printStackTrace();
 		}
 		
-		//assertEquals(9,mClassToTest.add(mArg1,mArg2));
+		
 	}
 	
 }
