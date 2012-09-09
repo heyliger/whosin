@@ -1,59 +1,25 @@
 package com.whosinapp.whosinappclient.createevent;
 
 public class CreateEventDto {
-	private int year;
-	private int month;
-	private int day;
-	private int hour;
-	private int minute;
-	private String name;
+	private String _dateAndTime;
+	private String _name;
 	
-	public int getYear()
+	public String getDateAndTime()
 	{
-		return year;
+		return _dateAndTime;
 	}
-	public int getMonth()
+	public void setDateAndTime(String dateAndTime)
 	{
-		return month;
+		_dateAndTime = dateAndTime;
 	}
-	public int getDay()
-	{
-		return day;
-	}
-	public int getHour()
-	{
-		return hour;
-	}
-	public int getMinute()
-	{
-		return minute;
-	}
+
 	public String getName()
 	{
-		return name;
+		return _name;
 	}
-	public void setYear(int yr)
+
+	public void setName(String name)
 	{
-		year = yr;
-	}
-	public void setMonth(int mn)
-	{
-		month = mn;
-	}
-	public void setDay(int dy)
-	{
-		day = dy;
-	}
-	public void setHour(int hr)
-	{
-		hour = hr;
-	}
-	public void setMinute(int mn)
-	{
-		minute = mn;
-	}
-	public void setName(String nameCandidate)
-	{
-		name = nameCandidate;
+		_name = name;
 	}
 }

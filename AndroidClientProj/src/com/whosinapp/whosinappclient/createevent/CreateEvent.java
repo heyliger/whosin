@@ -38,17 +38,29 @@ implements OnClickListener
 	public void onClick(View arg0) {
 	if (arg0.getId() == R.id.button_CreateEvent_AddUsersTransition)
 	{
+		
+		// Format date to YYYY-MM-DDThh:mmZ
+		
+		 
+		
 		//They clicked add users.  They want to go to the add users activity.
 		//First, lets create their event.
 		String nameOfEvent = ((EditText)this.findViewById(R.id.editText_CreateEvent_Name)).getText().toString();
 		DatePicker theDayOf = (DatePicker)this.findViewById(R.id.datePicker_EventCreation_DatePicker);
+		
+
+		
 		int year = theDayOf.getYear();
 		int month = theDayOf.getMonth();
 		int day = theDayOf.getDayOfMonth();
 		TimePicker timeOf = (TimePicker)this.findViewById(R.id.timePicker_EventCreation_TimePicker);
 		int hour = timeOf.getCurrentHour();
 		int minute=timeOf.getCurrentMinute();
-		myController.DoCreateEventAndTransitionToAddUsers(nameOfEvent,year,month,day,hour,minute);
+		
+		String eventDate = theDayOf.getYear() + "-" + theDayOf.getMonth() + "-" + theDayOf.getDayOfMonth() + "T";
+		String eventTime = timeOf.getCurrentHour() + ":" + timeOf.getCurrentMinute() + "Z";
+		
+		myController.DoCreateEventAndTransitionToAddUsers(nameOfEvent, eventDate + eventTime);
 		
 	}
 	}
