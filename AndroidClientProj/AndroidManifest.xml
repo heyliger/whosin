@@ -52,12 +52,16 @@
             android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-            android:name="com.whosinapp.whoisinappclient.getallgroupsforuser.GetUsersForGroupActivity"
+            android:name=".getusersforgroup.GetUsersForGroupActivity"
             android:label="@string/title_activity_get_all_users_for_group" >
-            </activity>
-		<activity
+        </activity>
+        <activity
             android:name=".getalleventsforuser.ShowAllEventsForUserActivity"
             android:label="@string/title_activity_show_all_events_for_user" >
+        </activity>
+        <activity
+            android:name=".getgroupsforuser.GetGroupsForUserActivity"
+            android:label="@string/title_activity_get_groups_for_user" >
         </activity>
     </application>
 

@@ -1,6 +1,7 @@
 package com.whosinapp.whosinappclient.adduserstoevent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
@@ -18,6 +19,19 @@ public class AddUsersToEventController {
 		_myActivity = mainActivity;
 	}
 
+	public void addUsersToEvent(int eventId, ArrayList<Integer> userIds) throws ClientProtocolException, IOException{
+		
+		AddUsersToEventDto dto = new AddUsersToEventDto();
+		
+		dto.setEventId(eventId);
+		dto.setUserIds(userIds);
+		
+		ServiceGateway theGate = new ServiceGateway();
+		
+		theGate.Send(dto);
+		
+	}
+	
 	public void searchForUserByEmail(Editable emailAddress)
 			throws ClientProtocolException, IOException, JSONException {
 

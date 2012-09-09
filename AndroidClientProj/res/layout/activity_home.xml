@@ -28,4 +28,10 @@
         android:layout_height="wrap_content"
         android:text="Get Users For Group" />
 	
+	<Button
+        android:id="@+id/button_Home_GetGroupsForUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Groups For User" />
+	
 </LinearLayout>
