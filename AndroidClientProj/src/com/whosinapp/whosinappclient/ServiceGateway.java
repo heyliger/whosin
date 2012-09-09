@@ -106,7 +106,7 @@ public class ServiceGateway {
 		HttpClient webClient = new DefaultHttpClient();
 		HttpResponse webResponse = webClient.execute(theDelete);
 	}
-	public Iterable<EventInfoStub> Send(GetAllEventsForUserDto dto)
+	public ArrayList<EventInfoStub> Send(GetAllEventsForUserDto dto)
 	{
         HttpClient client = new DefaultHttpClient();
         HttpGet request = new HttpGet();

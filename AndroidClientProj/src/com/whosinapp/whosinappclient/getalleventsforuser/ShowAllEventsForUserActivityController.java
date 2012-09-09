@@ -1,6 +1,7 @@
 package com.whosinapp.whosinappclient.getalleventsforuser;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
@@ -15,9 +16,9 @@ public class ShowAllEventsForUserActivityController {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Iterable<EventInfoStub> RetrieveAllEventsForUser() {
+	public ArrayList<EventInfoStub> RetrieveAllEventsForUser() {
 		ServiceGateway myGate = new ServiceGateway();
-		Iterable<EventInfoStub> myEvents = myGate.Send(new GetAllEventsForUserDto());
+		ArrayList<EventInfoStub> myEvents = myGate.Send(new GetAllEventsForUserDto());
 		return myEvents;
 	}
 

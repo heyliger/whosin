@@ -1,5 +1,7 @@
 package com.whosinapp.whosinappclient.getalleventsforuser;
 
+import java.util.ArrayList;
+
 import com.whosinapp.whosinappclient.R;
 import com.whosinapp.whosinappclient.R.layout;
 import com.whosinapp.whosinappclient.R.menu;
@@ -22,10 +24,12 @@ implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_events_for_user);
         myController = new ShowAllEventsForUserActivityController(this);
-        Iterable<EventInfoStub> events = myController.RetrieveAllEventsForUser();
+        ArrayList<EventInfoStub> events = myController.RetrieveAllEventsForUser();
         ListViewEventDataAdapter adapt = new ListViewEventDataAdapter(this.getApplicationContext(),events);
         ListView view = (ListView)this.findViewById(R.id.listView_eventList);
         view.setAdapter(adapt);
+        adapt.notifyDataSetChanged();
+        
         }
     private ShowAllEventsForUserActivityController myController;
     @Override
