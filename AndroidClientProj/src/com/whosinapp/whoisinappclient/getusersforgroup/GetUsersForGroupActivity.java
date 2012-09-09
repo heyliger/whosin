@@ -40,7 +40,7 @@ public class GetUsersForGroupActivity extends Activity implements OnClickListene
         return true;
     }
     
-    public void ReturnUsersForGroup() {
+    public void ReturnUsersForGroup(View view) {
     		values = controller.ReturnUsersForGroup(editText.getText().toString());
     }
 
