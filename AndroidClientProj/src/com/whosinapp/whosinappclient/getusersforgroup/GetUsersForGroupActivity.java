@@ -22,7 +22,7 @@ public class GetUsersForGroupActivity extends Activity {
 
 	private GetUsersForGroupController controller = new GetUsersForGroupController();
 	private ArrayList<String> values;
-    private ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, R.id.listView_Get_Users_For_Group_Users_List, values);
+    private ArrayAdapter<String> adapter;
     private ListView listView;
     private EditText editText;
     @Override
@@ -30,6 +30,8 @@ public class GetUsersForGroupActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_users_for_group);
         listView = (ListView)this.findViewById(R.id.listView_Get_Users_For_Group_Users_List);
+        values = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, R.id.listView_Get_Users_For_Group_Users_List, values);
         listView.setAdapter(adapter);
         editText = (EditText)this.findViewById(R.id.editText_Get_Users_For_Group_Group);
     }
