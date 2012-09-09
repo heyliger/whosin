@@ -15,7 +15,6 @@ import android.widget.ListView;
 
 public class GetGroupsForUserActivity extends Activity {
 	private GetGroupsForUserController controller = new GetGroupsForUserController();
-	private EditText userText;
 	private ListView listView;
 	private ArrayAdapter<String> adapter;
 	private ArrayList<String> grouplist = new ArrayList<String>();
@@ -24,7 +23,6 @@ public class GetGroupsForUserActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_groups_for_user);
-        userText = (EditText)findViewById(R.id.editText_Get_Groups_For_User_Email);
         listView = (ListView)findViewById(R.id.listView_Get_Groups_For_User_Group_List);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, R.id.listView_Get_Groups_For_User_Group_List, grouplist);
         listView.setAdapter(adapter);
@@ -38,6 +36,6 @@ public class GetGroupsForUserActivity extends Activity {
     
     public void ReturnGroupsForUser()
     {
-    	grouplist = controller.ReturnGroupsForUser(userText.getText().toString());
+    	grouplist = controller.ReturnGroupsForUser();
     }
 }

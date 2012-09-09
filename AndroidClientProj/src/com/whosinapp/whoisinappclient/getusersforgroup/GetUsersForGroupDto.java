@@ -6,4 +6,9 @@ public class GetUsersForGroupDto {
 	public void setGroup(String group){
 		this._group = group;
 	}
+	
+	public String getGroup()
+	{
+		return _group;
+	}
 }

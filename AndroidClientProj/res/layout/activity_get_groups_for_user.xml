@@ -8,23 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Find Groups By User "
+        android:text="Find Groups For Current User "
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView_Get_Groups_For_User_Email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Email:" />
-
-    <EditText
-        android:id="@+id/editText_Get_Groups_For_User_Email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10">
-        <requestFocus />
-    </EditText>
 
     <Button
         android:id="@+id/button_Get_Groups_For_User_Return_Groups"
