@@ -274,11 +274,7 @@ public class ServiceGateway {
 		theJsonMap.put("date_and_time", dto.getDateAndTime());
 
 
-		JSONObject innerJsonObj = new JSONObject(theJsonMap);
-
-		Map<String, JSONObject> theOuterJson = new HashMap<String, JSONObject>();
-		theOuterJson.put("event", innerJsonObj);
-		JSONObject eventObj = new JSONObject(theOuterJson);
+		JSONObject eventObj = new JSONObject(theJsonMap);
 		HttpPost eventPoster = new HttpPost(serverURI + "/events.json");
 		try {
 			eventPoster.setEntity(new StringEntity(eventObj.toString()));
