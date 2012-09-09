@@ -18,7 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
-public class GetUsersForGroupActivity extends Activity implements OnClickListener {
+public class GetUsersForGroupActivity extends Activity {
 
 	private GetUsersForGroupController controller = new GetUsersForGroupController();
 	private ArrayList<String> values;
@@ -43,9 +43,4 @@ public class GetUsersForGroupActivity extends Activity implements OnClickListene
     public void ReturnUsersForGroup(View view) {
     		values = controller.ReturnUsersForGroup(editText.getText().toString());
     }
-
-	public void onClick(View view) {
-		// TODO Auto-generated method stub
-		
-	}
 }
