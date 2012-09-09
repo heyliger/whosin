@@ -51,6 +51,10 @@
             android:name=".creategroup.CreateGroupActivity"
             android:label="@string/title_activity_create_group" >
         </activity>
+        <activity
+            android:name="com.whosinapp.whoisinappclient.getallgroupsforuser.GetUsersForGroupActivity"
+            android:label="@string/title_activity_get_all_users_for_group" >
+        </activity>
     </application>
 
 </manifest>
