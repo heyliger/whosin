@@ -63,6 +63,8 @@ public class AddUsersToEventActivity extends Activity {
 		_listViewUsers = (ListView) this.findViewById(R.id.listViewUsers);
 		_buttonAddUsersToEvent = (Button) this
 				.findViewById(R.id.buttonAddUsersToEvent);
+		
+		_listViewUsers.setAdapter(_userAdapter);
 
 		_buttonSearch.setOnClickListener(new OnClickListener() {
 
