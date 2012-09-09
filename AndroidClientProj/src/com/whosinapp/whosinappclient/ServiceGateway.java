@@ -271,11 +271,8 @@ public class ServiceGateway {
 		// TODO Auto-generated method stub
 		Map<String, String> theJsonMap = new HashMap<String, String>();
 		theJsonMap.put("name", dto.getName());
-		theJsonMap.put("date_and_time(1i)", Integer.toString(dto.getYear()));
-		theJsonMap.put("date_and_time(2i)", Integer.toString(dto.getMonth()));
-		theJsonMap.put("date_and_time(3i)", Integer.toString(dto.getDay()));
-		theJsonMap.put("date_and_time(4i)", Integer.toString(dto.getHour()));
-		theJsonMap.put("date_and_time(5i)", Integer.toString(dto.getMinute()));
+		theJsonMap.put("date_and_time", dto.getDateAndTime());
+
 
 		JSONObject innerJsonObj = new JSONObject(theJsonMap);
 
