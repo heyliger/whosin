@@ -37,12 +37,6 @@ public class ServiceGateway {
 
 	private final static String TAG = ServiceGateway.class.getSimpleName();
 	private static String serverURI = "http://192.168.0.9:3000";
-<<<<<<< HEAD
-	public Iterable<EventInfoStub> Send(LogoutRequestDto logoutReq) throws ClientProtocolException, IOException{
-		HttpDelete theDelete = new HttpDelete(serverURI+"/api/v1/tokens/"+logoutReq.getToken()+".json");
-		theDelete.setHeader("X-API-KEY",logoutReq.getToken());
-		theDelete.setHeader("Content-Type", "application/x-www-form-urlencoded");
-=======
 
 	public ArrayList<String> Retrieve(GetUsersForGroupDto groupReq) {
 		ArrayList<String> results = new ArrayList<String>();
@@ -98,7 +92,7 @@ public class ServiceGateway {
 	            return results;
 	}
 
-	public void Send(LogoutRequestDto logoutReq)
+	public Iterable<EventInfoStub> Send(LogoutRequestDto logoutReq)
 			throws ClientProtocolException, IOException {
 		HttpDelete theDelete = new HttpDelete(serverURI + "/api/v1/tokens/"
 				+ logoutReq.getToken() + ".json");
@@ -106,7 +100,6 @@ public class ServiceGateway {
 		theDelete
 				.setHeader("Content-Type", "application/x-www-form-urlencoded");
 
->>>>>>> 5ad7467abc1f5ec3ff824a923df03a555679eadf
 		HttpClient webClient = new DefaultHttpClient();
 		webClient.execute(theDelete);
 	}
