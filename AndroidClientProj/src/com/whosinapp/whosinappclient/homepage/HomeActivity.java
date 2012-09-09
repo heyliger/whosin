@@ -49,6 +49,15 @@ implements OnClickListener
         {
         	Log.e("GetUsersForGroupButton", err.toString());
         }
+        try
+        {
+        	Button getGroupsForUserButton = (Button)this.findViewById(R.id.button_Home_GetGroupsForUser);
+        	getGroupsForUserButton.setOnClickListener(this);
+        }
+        catch (Exception err)
+        {
+        	Log.e("GetUsersForGroupButton", err.toString());
+        }
         		
     }
 
@@ -76,6 +85,10 @@ implements OnClickListener
 		if(arg0.getId()==R.id.button_Home_GetUsersForGroup)
 		{
 			myController.DoGetUsersForGroup();
+		}
+		if(arg0.getId()==R.id.button_Home_GetGroupsForUser)
+		{
+			myController.DoGetGroupsForUser();
 		}
 	}
 }

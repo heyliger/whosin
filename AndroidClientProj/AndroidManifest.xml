@@ -54,10 +54,19 @@
         <activity
             android:name="com.whosinapp.whoisinappclient.getallgroupsforuser.GetUsersForGroupActivity"
             android:label="@string/title_activity_get_all_users_for_group" >
-            </activity>
-		<activity
+        </activity>
+        <activity
             android:name=".getalleventsforuser.ShowAllEventsForUserActivity"
             android:label="@string/title_activity_show_all_events_for_user" >
+        </activity>
+        <activity
+            android:name=".getgroupsforuser.GetGroupsForUserActivity"
+            android:label="@string/title_activity_get_groups_for_user" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
