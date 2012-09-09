@@ -52,7 +52,7 @@
             android:label="@string/title_activity_create_group" >
         </activity>
         <activity
-            android:name=".getallgroupsforuser.GetUsersForGroupActivity"
+            android:name=".getusersforgroup.GetUsersForGroupActivity"
             android:label="@string/title_activity_get_all_users_for_group" >
         </activity>
         <activity
