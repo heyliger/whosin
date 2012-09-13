@@ -6,7 +6,9 @@ import com.google.android.gcm.GCMRegistrar;
 import org.apache.http.client.ClientProtocolException;
 
 import com.whosinapp.whosinappclient.R;
+import com.whosinapp.whosinappclient.ServiceGateway;
 import com.whosinapp.whosinappclient.NewUser.NewUserActivity;
+import com.whosinapp.whosinappclient.registerdevice.RegisterDeviceDto;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -49,21 +51,6 @@ implements android.view.View.OnClickListener
          * first to check if the device is already registered.
          */
         
-        //try
-        {
-	        GCMRegistrar.checkDevice(this);
-	        GCMRegistrar.checkManifest(this);
-	        final String regId = GCMRegistrar.getRegistrationId(this);
-	        if (regId.equals("")) {
-	          GCMRegistrar.register(this, "1068757721296");
-	        } else {
-	          Log.v(TAG, "Already registered");
-	        }
-        }
-//        catch (Exception ex)
-//        {
-//        	Log.v(TAG, ex.toString());
-//        }
         
         
     }

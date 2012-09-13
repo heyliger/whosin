@@ -34,12 +34,13 @@ import com.whosinapp.whosinappclient.getusersforgroup.GetUsersForGroupDto;
 import com.whosinapp.whosinappclient.logout.LogoutRequestDto;
 import com.whosinapp.whosinappclient.models.EventInfoStub;
 import com.whosinapp.whosinappclient.models.User;
+import com.whosinapp.whosinappclient.registerdevice.RegisterDeviceDto;
 import com.whosinapp.whosinappclient.utils.StringUtils;
 
 public class ServiceGateway {
 
 	private final static String TAG = ServiceGateway.class.getSimpleName();
-	private static String serverURI = "http://192.168.0.9:3000";
+	private static String serverURI = "http://localhost:3000";
 
 	public ArrayList<String> Retrieve(GetUsersForGroupDto groupReq) {
 		ArrayList<String> results = new ArrayList<String>();
@@ -106,6 +107,47 @@ public class ServiceGateway {
 		HttpClient webClient = new DefaultHttpClient();
 		HttpResponse webResponse = webClient.execute(theDelete);
 	}
+	
+	public void Send(RegisterDeviceDto dto) 
+			throws ClientProtocolException, IOException {
+		HashMap<String, String> map = new HashMap<String, String>();
+
+		map.put("description", dto.getDescription());
+		map.put("registrationId", dto.getRegistrationId());
+
+		JSONObject jsonBuilder = new JSONObject(map);
+		Map<String, JSONObject> tmp = new HashMap<String, JSONObject>();
+
+		tmp.put("device", jsonBuilder);
+
+		JSONObject jsonBuilder2 = new JSONObject(tmp);
+
+		HttpPost poster = new HttpPost(serverURI + "/devices.json");
+		poster.setEntity(new StringEntity(jsonBuilder2.toString()));
+		poster.setHeader("Accept", "application/json");
+		poster.setHeader("Content-type", "application/json");
+		poster.setHeader("X-API-KEY", LoginActivityController.GoodLoginToken);
+		HttpClient webSender = new DefaultHttpClient();
+
+		HttpResponse response = webSender.execute(poster);
+
+		BufferedReader reader = new BufferedReader(new InputStreamReader(
+				response.getEntity().getContent(), "UTF-8"));
+		StringBuilder builder = new StringBuilder();
+		for (String line = null; (line = reader.readLine()) != null;) {
+			builder.append(line).append("\n");
+		}
+		JSONTokener tokener = new JSONTokener(builder.toString());
+		JSONArray finalResult;
+		try {
+			finalResult = new JSONArray(tokener);
+			Log.d(TAG, "HttpResponse: " + finalResult.toString());
+		} catch (JSONException e) {
+			Log.e(TAG, e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	public ArrayList<EventInfoStub> Send(GetAllEventsForUserDto dto)
 	{
         HttpClient client = new DefaultHttpClient();

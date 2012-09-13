@@ -1,6 +1,13 @@
 package com.whosinapp.whosinappclient.homepage;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+
+import com.google.android.gcm.GCMRegistrar;
 import com.whosinapp.whosinappclient.R;
+import com.whosinapp.whosinappclient.ServiceGateway;
+import com.whosinapp.whosinappclient.registerdevice.RegisterDeviceDto;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -13,6 +20,7 @@ import android.widget.Button;
 public class HomeActivity extends Activity 
 implements OnClickListener
 {
+	private static final String TAG = HomeActivity.class.getSimpleName();
 	HomeActivityController myController = new HomeActivityController(this);
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,6 +29,8 @@ implements OnClickListener
         Button logoutButton = (Button)this.findViewById(R.id.button_Home_Logout);
         logoutButton.setClickable(true);
         logoutButton.setOnClickListener(this);
+        
+        myController.RegisterDevice(this, TAG);
         
         try
         {
