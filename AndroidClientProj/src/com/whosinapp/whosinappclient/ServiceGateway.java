@@ -40,7 +40,7 @@ import com.whosinapp.whosinappclient.utils.StringUtils;
 public class ServiceGateway {
 
 	private final static String TAG = ServiceGateway.class.getSimpleName();
-	private static String serverURI = "http://localhost:3000";
+	private static String serverURI = "http://192.168.1.79:3000";
 
 	public ArrayList<String> Retrieve(GetUsersForGroupDto groupReq) {
 		ArrayList<String> results = new ArrayList<String>();
@@ -113,7 +113,7 @@ public class ServiceGateway {
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		map.put("description", dto.getDescription());
-		map.put("registrationId", dto.getRegistrationId());
+		map.put("registration_id", dto.getRegistrationId());
 
 		JSONObject jsonBuilder = new JSONObject(map);
 		Map<String, JSONObject> tmp = new HashMap<String, JSONObject>();
