@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
 
 import com.google.android.gcm.GCMRegistrar;
+import com.whosinapp.whosinappclient.GCMIntentService;
 import com.whosinapp.whosinappclient.ServiceGateway;
 import com.whosinapp.whosinappclient.createevent.CreateEvent;
 import com.whosinapp.whosinappclient.creategroup.CreateGroupActivity;
@@ -60,23 +61,16 @@ public class HomeActivityController {
         	// This is the first time the device has 
         	// run the app.  Register for push notifications
           GCMRegistrar.register(context, "1068757721296");
+          Log.v(tag, "Newly registered");
         } else {
-        	// The app has been run before, simply retrieve
-        	// the registration id and send it to 
-        	// the server. 
-        	ServiceGateway theGateway = new ServiceGateway();
-    		RegisterDeviceDto dto = new	RegisterDeviceDto();
-    		// TODO Get Device identifier
-    		dto.setDescription("test_description");
-    		dto.setRegistrationId(regId);
-    		try {
-    			theGateway.Send(dto);
-    		} catch (ClientProtocolException e) {
-    			Log.e(tag, e.getMessage());
-    		} catch (IOException e) {
-    			Log.e(tag, e.getMessage());
-
-    		}
+        	//GCMRegistrar.unregister(context);
+        	// This shouldn't be necessary because if we already
+        	// have a registration id, then the server should already
+        	// know about it.  However, it doesn't hurt to do this
+        	// and addresses the case in which the device was successfully 
+        	// registered with the GCM service, but our server never 
+        	// got the notification.
+        	GCMIntentService.sendRegistrationToServer(regId);
           Log.v(tag, "Already registered");
         }
 	}

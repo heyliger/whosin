@@ -131,7 +131,7 @@ public class ServiceGateway {
 
 		HttpResponse response = webSender.execute(poster);
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(
+		/*BufferedReader reader = new BufferedReader(new InputStreamReader(
 				response.getEntity().getContent(), "UTF-8"));
 		StringBuilder builder = new StringBuilder();
 		for (String line = null; (line = reader.readLine()) != null;) {
@@ -145,7 +145,7 @@ public class ServiceGateway {
 		} catch (JSONException e) {
 			Log.e(TAG, e.getMessage());
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	public ArrayList<EventInfoStub> Send(GetAllEventsForUserDto dto)

@@ -6,6 +6,7 @@ import org.apache.http.client.ClientProtocolException;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,8 +15,13 @@ import com.whosinapp.whosinappclient.registerdevice.RegisterDeviceDto;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
+	// events come back on their own thread,
+	// so we use this handler to invoke them back to the main thread
+	Handler _mainThreadHandler = null;
+	
 	public GCMIntentService() {
 		super("1068757721296");
+		_mainThreadHandler = new Handler();
 	}
 	
 	@Override
@@ -26,12 +32,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 		 * be done other than evaluating the error (returned by errorId) 
 		 * and trying to fix the problem.
 		 */
-		Context context = getApplicationContext();
-		CharSequence text = error;
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
+		
 	}
 
 	@Override
@@ -41,12 +42,21 @@ public class GCMIntentService extends GCMBaseIntentService {
 		 * it to the device. If the message has a payload, its contents are 
 		 * available as extras in the intent.
 		 */
-		Context context = getApplicationContext();
-		CharSequence text = "test";//intent.getStringExtra(name);
-		int duration = Toast.LENGTH_SHORT;
-
-		Toast toast = Toast.makeText(context, text, duration);
-		toast.show();
+		
+		// This is like a dispatcher.invoke call in .NET
+		final String messageText = intent.getStringExtra("message_text");
+		
+		_mainThreadHandler.post(new Runnable() {
+			String message = messageText;
+			@Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+            }
+        });
+		
+		
+				
+		Log.v(TAG, "GCM Message Arrived: " + messageText);
 	}
 
 	@Override
@@ -58,10 +68,23 @@ public class GCMIntentService extends GCMBaseIntentService {
 		 * you should send the regid to your server so it can use it to send messages 
 		 * to this device.
 		 */
+		sendRegistrationToServer(registrationId);
+	}
+
+	public static void sendRegistrationToServer(String registrationId) {
 		ServiceGateway theGateway = new ServiceGateway();
 		RegisterDeviceDto dto = new	RegisterDeviceDto();
-		// TODO Get Device identifier
-		dto.setDescription("test_description");
+		
+		String device = android.os.Build.DEVICE;
+		String brand = android.os.Build.BRAND;
+		String man = android.os.Build.MANUFACTURER;
+		String model = android.os.Build.MODEL;
+		
+		dto.setDescription(
+				device + "-" + 
+				brand + "-" +
+				man + "-" + 
+				model);
 		dto.setRegistrationId(registrationId);
 		try {
 			theGateway.Send(dto);
@@ -75,7 +98,8 @@ public class GCMIntentService extends GCMBaseIntentService {
 
 	@Override
 	protected void onUnregistered(Context arg0, String arg1) {
-		// TODO Auto-generated method stub
+		// TODO When the app is uninstalled, the registration should
+		// be revoked.
 		/*
 		 * Called after the device has been unregistered from GCM. 
 		 * Typically, you should send the regid to the server so it 
