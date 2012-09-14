@@ -1,5 +1,7 @@
 package com.whosinapp.whosinappclient.models;
 
+import java.util.Date;
+
 public class EventInfoStub {
 
 	public long getId() {
@@ -14,5 +16,9 @@ private String name;
 	{
 		return name;
 	}
+	
+	private Date date;
+	private String description;
+	
 
 }

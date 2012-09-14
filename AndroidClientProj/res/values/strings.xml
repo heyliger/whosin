@@ -19,5 +19,8 @@
     <string name="title_activity_get_all_users_for_group">GetAllUsersForGroup</string>
     <string name="title_activity_show_all_events_for_user">ShowAllEventsForUserActivity</string>
     <string name="title_activity_get_groups_for_user">GetGroupsForUser</string>
+    <string name="title_activity_respond_to_event_invite">Respond to Event Invite</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
 
 </resources>

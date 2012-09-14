@@ -81,6 +81,10 @@
             android:name=".getgroupsforuser.GetGroupsForUserActivity"
             android:label="@string/title_activity_get_groups_for_user" >
         </activity>
+        <activity
+            android:name=".respondtoeventinvite.RespondToEventInviteActivity"
+            android.label="@string/title_activity_respond_to_event_invite" >
+        </activity>
     </application>
 
 </manifest>

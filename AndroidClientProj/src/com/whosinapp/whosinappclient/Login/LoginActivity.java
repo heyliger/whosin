@@ -36,20 +36,7 @@ implements android.view.View.OnClickListener
         Button newUser = (Button)this.findViewById(R.id.button_New_User);
         newUser.setOnClickListener((android.view.View.OnClickListener) this);
         
-        /*
-         * The checkDevice() method verifies that the device supports GCM and throws 
-         * an exception if it does not (for instance, if it is an emulator that does 
-         * not contain the Google APIs). Similarly, the checkManifest() method verifies 
-         * that the application manifest contains meets all the requirements described 
-         * in Writing the Android Application (this method is only necessary 
-         * when you are developing the application; once the application is ready 
-         * to be published, you can remove it).
-         * Once the sanity checks are done, the device calls GCMRegsistrar.register() 
-         * to register the device, passing the SENDER_ID you got when you signed up for GCM. 
-         * But since the GCMRegistrar singleton keeps track of the registration ID upon 
-         * the arrival of registration intents, you can call GCMRegistrar.getRegistrationId() 
-         * first to check if the device is already registered.
-         */
+        
         
         
         
